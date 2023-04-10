@@ -1,7 +1,10 @@
 package boardJ.Board.controller;
 
+import boardJ.Board.dto.LoginInfo;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +15,11 @@ public class BoardController {
     @GetMapping("/")
     // classpath:/templates/list.html 로 가게됨!
     //
-    public String list() {
+    public String list(HttpSession session, Model model) {
+        LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+
+        // null이나 아니냐
+        model.addAttribute("logInInfo", loginInfo);
         // 게시물 목록 보여주는 곳
 
         return "list"; // 포워드함

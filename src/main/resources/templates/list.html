@@ -17,13 +17,16 @@
 
   <div class="login-info">
     <div class="container">
-          <span class="login-info_user" >
+          <span th:if="${logInInfo != null}" th:text="${logInInfo.name}" class="login-info_user" >
             <span >김성박</span>
           </span>
-      <span class="login-info_logout">
+      <span th:if="${logInInfo != null}" class="login-info_logout">
             <a href="/logout">로그아웃</a>
       </span>
-      <span class="login-info_join">
+      <span th:if="${logInInfo == null}" class="login-info_login">
+            <a href="/loginform">로그인</a>
+      </span>
+      <span th:if="${logInInfo == null}" class="login-info_join">
             <a href="/userRegForm">회원가입</a>
       </span>
     </div>
