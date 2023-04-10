@@ -3,6 +3,7 @@ package boardJ.Board.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller // http 요청을 받아서 처리해주는 컴포넌트
@@ -21,5 +22,22 @@ public class BoardController {
         // 해당 게시물을 읽어오고!
         // 조회수도 1증가시키기!
         return "board";
+    }
+
+    @GetMapping("/writeForm")
+    public String writeForm() {
+        // 로그인 한사람만 사용가능하게!!
+        // session에서 로그인 정보 읽어들여야함!
+
+        return "writeForm";
+    }
+
+    @PostMapping("/write")
+    public String write(
+            @RequestParam("title") String title,
+            @RequestParam("content") String content
+    ){
+        log.info("title={}, content={}",title, content);
+        return "redirect:/";
     }
 }
