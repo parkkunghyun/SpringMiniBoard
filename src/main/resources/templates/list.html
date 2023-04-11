@@ -17,8 +17,8 @@
 
   <div class="login-info">
     <div class="container">
-          <span th:if="${logInInfo != null}" th:text="${logInInfo.name}" class="login-info_user" >
-            <span >김성박</span>
+          <span th:if="${logInInfo != null}" class="login-info_user" >
+            <span  th:text="${logInInfo.name}" >김성박</span>
           </span>
       <span th:if="${logInInfo != null}" class="login-info_logout">
             <a href="/logout">로그아웃</a>
@@ -46,29 +46,29 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
+        <tr th:each="board : ${list}">
+          <td th:text="${board.boardId}">1</td>
           <th>
-            <a href="/board?id=1">글제목1</a>
+            <a th:href="@{/board(id=${board.boardId})}" th:text="${board.title}">글제목1</a>
           </th>
-          <td>조회수 1</td>
-          <td >김성박</td>
-          <td >2023.0406</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <th>
-            <a href="/board?id=2">글제목222</a>
-          </th>
-          <td>조회수 22</td>
-          <td >2성박</td>
-          <td >2023.0406</td>
+          <td th:text="${board.viewCnt}">조회수 1</td>
+          <td th:text="${board.name}" >김성박</td>
+          <td th:text="${board.regdate}">2023.0406</td>
         </tr>
         </tbody>
       </table>
     </div>
+
     <div>
-      <a href="/writeForm">글쓰기</a>
+      <a href="/writeForm" th:if="${logInInfo != null}">글쓰기</a>
+      <span th:if="${logInInfo==null}">글쓰기 - 로그인 하고 가능!</span>
+    </div>
+
+    <div>
+      <!--1부터 1000까지 페이지가 있을때 너무 많으면 > >> 같은거 생성하기!-->
+      <span th:each="n : ${#numbers.sequence(1, pageCount)}">
+        <a th:href="@{/(page=${n})}" th:text="${n}" ></a>
+      </span>
     </div>
   </div>
 </section>
