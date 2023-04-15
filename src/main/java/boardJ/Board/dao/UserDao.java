@@ -56,7 +56,6 @@ public class UserDao {
         jdbcTemplate.update(sql,params);
 
     }
-
     @Transactional
     public User getUser(String email) {
         // user_id -> setUsetId 등으로 각각 매핑됨!

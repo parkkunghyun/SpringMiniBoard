@@ -85,7 +85,6 @@ public class BoardController {
         boardService.addBoard(loginInfo.getUserId(),title,content);
         return "redirect:/";
     }
-
     @GetMapping("/delete")
     public String delete(@RequestParam("boardId") int boardId, HttpSession session) {
         LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
